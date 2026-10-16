@@ -12,7 +12,13 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DiscoverRouteImport } from './routes/discover'
 import { Route as FeedRouteImport } from './routes/feed'
+import { Route as HackathonsRouteImport } from './routes/hackathons'
+import { Route as JobsRouteImport } from './routes/jobs'
 import { Route as NetworkRouteImport } from './routes/network'
+import { Route as SavedRouteImport } from './routes/saved'
+import { Route as CommunitiesIndexRouteImport } from './routes/communities.index'
+import { Route as CommunitiesIdRouteImport } from './routes/communities.$id'
+import { Route as ProfileIdRouteImport } from './routes/profile.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -29,9 +35,39 @@ const FeedRoute = FeedRouteImport.update({
   path: '/feed',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HackathonsRoute = HackathonsRouteImport.update({
+  id: '/hackathons',
+  path: '/hackathons',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JobsRoute = JobsRouteImport.update({
+  id: '/jobs',
+  path: '/jobs',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NetworkRoute = NetworkRouteImport.update({
   id: '/network',
   path: '/network',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SavedRoute = SavedRouteImport.update({
+  id: '/saved',
+  path: '/saved',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommunitiesIndexRoute = CommunitiesIndexRouteImport.update({
+  id: '/communities/',
+  path: '/communities/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommunitiesIdRoute = CommunitiesIdRouteImport.update({
+  id: '/communities/$id',
+  path: '/communities/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileIdRoute = ProfileIdRouteImport.update({
+  id: '/profile/$id',
+  path: '/profile/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -39,34 +75,89 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/discover': typeof DiscoverRoute
   '/feed': typeof FeedRoute
+  '/hackathons': typeof HackathonsRoute
+  '/jobs': typeof JobsRoute
   '/network': typeof NetworkRoute
+  '/saved': typeof SavedRoute
+  '/communities/$id': typeof CommunitiesIdRoute
+  '/profile/$id': typeof ProfileIdRoute
+  '/communities/': typeof CommunitiesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/discover': typeof DiscoverRoute
   '/feed': typeof FeedRoute
+  '/hackathons': typeof HackathonsRoute
+  '/jobs': typeof JobsRoute
   '/network': typeof NetworkRoute
+  '/saved': typeof SavedRoute
+  '/communities/$id': typeof CommunitiesIdRoute
+  '/profile/$id': typeof ProfileIdRoute
+  '/communities': typeof CommunitiesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/discover': typeof DiscoverRoute
   '/feed': typeof FeedRoute
+  '/hackathons': typeof HackathonsRoute
+  '/jobs': typeof JobsRoute
   '/network': typeof NetworkRoute
+  '/saved': typeof SavedRoute
+  '/communities/$id': typeof CommunitiesIdRoute
+  '/profile/$id': typeof ProfileIdRoute
+  '/communities/': typeof CommunitiesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/discover' | '/feed' | '/network'
+  fullPaths:
+    | '/'
+    | '/discover'
+    | '/feed'
+    | '/hackathons'
+    | '/jobs'
+    | '/network'
+    | '/saved'
+    | '/communities/$id'
+    | '/profile/$id'
+    | '/communities/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/discover' | '/feed' | '/network'
-  id: '__root__' | '/' | '/discover' | '/feed' | '/network'
+  to:
+    | '/'
+    | '/discover'
+    | '/feed'
+    | '/hackathons'
+    | '/jobs'
+    | '/network'
+    | '/saved'
+    | '/communities/$id'
+    | '/profile/$id'
+    | '/communities'
+  id:
+    | '__root__'
+    | '/'
+    | '/discover'
+    | '/feed'
+    | '/hackathons'
+    | '/jobs'
+    | '/network'
+    | '/saved'
+    | '/communities/$id'
+    | '/profile/$id'
+    | '/communities/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DiscoverRoute: typeof DiscoverRoute
   FeedRoute: typeof FeedRoute
+  HackathonsRoute: typeof HackathonsRoute
+  JobsRoute: typeof JobsRoute
   NetworkRoute: typeof NetworkRoute
+  SavedRoute: typeof SavedRoute
+  CommunitiesIdRoute: typeof CommunitiesIdRoute
+  ProfileIdRoute: typeof ProfileIdRoute
+  CommunitiesIndexRoute: typeof CommunitiesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -92,11 +183,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FeedRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/hackathons': {
+      id: '/hackathons'
+      path: '/hackathons'
+      fullPath: '/hackathons'
+      preLoaderRoute: typeof HackathonsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/jobs': {
+      id: '/jobs'
+      path: '/jobs'
+      fullPath: '/jobs'
+      preLoaderRoute: typeof JobsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/network': {
       id: '/network'
       path: '/network'
       fullPath: '/network'
       preLoaderRoute: typeof NetworkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/saved': {
+      id: '/saved'
+      path: '/saved'
+      fullPath: '/saved'
+      preLoaderRoute: typeof SavedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/communities/': {
+      id: '/communities/'
+      path: '/communities'
+      fullPath: '/communities/'
+      preLoaderRoute: typeof CommunitiesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/communities/$id': {
+      id: '/communities/$id'
+      path: '/communities/$id'
+      fullPath: '/communities/$id'
+      preLoaderRoute: typeof CommunitiesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile/$id': {
+      id: '/profile/$id'
+      path: '/profile/$id'
+      fullPath: '/profile/$id'
+      preLoaderRoute: typeof ProfileIdRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -106,7 +239,13 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DiscoverRoute: DiscoverRoute,
   FeedRoute: FeedRoute,
+  HackathonsRoute: HackathonsRoute,
+  JobsRoute: JobsRoute,
   NetworkRoute: NetworkRoute,
+  SavedRoute: SavedRoute,
+  CommunitiesIdRoute: CommunitiesIdRoute,
+  ProfileIdRoute: ProfileIdRoute,
+  CommunitiesIndexRoute: CommunitiesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
