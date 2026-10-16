@@ -10,12 +10,19 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as DiscoverRouteImport } from './routes/discover'
 import { Route as FeedRouteImport } from './routes/feed'
+import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as HackathonsRouteImport } from './routes/hackathons'
 import { Route as JobsRouteImport } from './routes/jobs'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as MessagesRouteImport } from './routes/messages'
 import { Route as NetworkRouteImport } from './routes/network'
+import { Route as NotificationsRouteImport } from './routes/notifications'
+import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as SavedRouteImport } from './routes/saved'
+import { Route as SignupRouteImport } from './routes/signup'
 import { Route as CommunitiesIndexRouteImport } from './routes/communities.index'
 import { Route as CommunitiesIdRouteImport } from './routes/communities.$id'
 import { Route as ProfileIdRouteImport } from './routes/profile.$id'
@@ -23,6 +30,11 @@ import { Route as ProfileIdRouteImport } from './routes/profile.$id'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DiscoverRoute = DiscoverRouteImport.update({
@@ -35,6 +47,11 @@ const FeedRoute = FeedRouteImport.update({
   path: '/feed',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HackathonsRoute = HackathonsRouteImport.update({
   id: '/hackathons',
   path: '/hackathons',
@@ -45,14 +62,39 @@ const JobsRoute = JobsRouteImport.update({
   path: '/jobs',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MessagesRoute = MessagesRouteImport.update({
+  id: '/messages',
+  path: '/messages',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NetworkRoute = NetworkRouteImport.update({
   id: '/network',
   path: '/network',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NotificationsRoute = NotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingRoute = OnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SavedRoute = SavedRouteImport.update({
   id: '/saved',
   path: '/saved',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CommunitiesIndexRoute = CommunitiesIndexRouteImport.update({
@@ -73,24 +115,38 @@ const ProfileIdRoute = ProfileIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/discover': typeof DiscoverRoute
   '/feed': typeof FeedRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/hackathons': typeof HackathonsRoute
   '/jobs': typeof JobsRoute
+  '/login': typeof LoginRoute
+  '/messages': typeof MessagesRoute
   '/network': typeof NetworkRoute
+  '/notifications': typeof NotificationsRoute
+  '/onboarding': typeof OnboardingRoute
   '/saved': typeof SavedRoute
+  '/signup': typeof SignupRoute
   '/communities/$id': typeof CommunitiesIdRoute
   '/profile/$id': typeof ProfileIdRoute
   '/communities/': typeof CommunitiesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/discover': typeof DiscoverRoute
   '/feed': typeof FeedRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/hackathons': typeof HackathonsRoute
   '/jobs': typeof JobsRoute
+  '/login': typeof LoginRoute
+  '/messages': typeof MessagesRoute
   '/network': typeof NetworkRoute
+  '/notifications': typeof NotificationsRoute
+  '/onboarding': typeof OnboardingRoute
   '/saved': typeof SavedRoute
+  '/signup': typeof SignupRoute
   '/communities/$id': typeof CommunitiesIdRoute
   '/profile/$id': typeof ProfileIdRoute
   '/communities': typeof CommunitiesIndexRoute
@@ -98,12 +154,19 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/discover': typeof DiscoverRoute
   '/feed': typeof FeedRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/hackathons': typeof HackathonsRoute
   '/jobs': typeof JobsRoute
+  '/login': typeof LoginRoute
+  '/messages': typeof MessagesRoute
   '/network': typeof NetworkRoute
+  '/notifications': typeof NotificationsRoute
+  '/onboarding': typeof OnboardingRoute
   '/saved': typeof SavedRoute
+  '/signup': typeof SignupRoute
   '/communities/$id': typeof CommunitiesIdRoute
   '/profile/$id': typeof ProfileIdRoute
   '/communities/': typeof CommunitiesIndexRoute
@@ -112,36 +175,57 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/discover'
     | '/feed'
+    | '/forgot-password'
     | '/hackathons'
     | '/jobs'
+    | '/login'
+    | '/messages'
     | '/network'
+    | '/notifications'
+    | '/onboarding'
     | '/saved'
+    | '/signup'
     | '/communities/$id'
     | '/profile/$id'
     | '/communities/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
     | '/discover'
     | '/feed'
+    | '/forgot-password'
     | '/hackathons'
     | '/jobs'
+    | '/login'
+    | '/messages'
     | '/network'
+    | '/notifications'
+    | '/onboarding'
     | '/saved'
+    | '/signup'
     | '/communities/$id'
     | '/profile/$id'
     | '/communities'
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/discover'
     | '/feed'
+    | '/forgot-password'
     | '/hackathons'
     | '/jobs'
+    | '/login'
+    | '/messages'
     | '/network'
+    | '/notifications'
+    | '/onboarding'
     | '/saved'
+    | '/signup'
     | '/communities/$id'
     | '/profile/$id'
     | '/communities/'
@@ -149,12 +233,19 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   DiscoverRoute: typeof DiscoverRoute
   FeedRoute: typeof FeedRoute
+  ForgotPasswordRoute: typeof ForgotPasswordRoute
   HackathonsRoute: typeof HackathonsRoute
   JobsRoute: typeof JobsRoute
+  LoginRoute: typeof LoginRoute
+  MessagesRoute: typeof MessagesRoute
   NetworkRoute: typeof NetworkRoute
+  NotificationsRoute: typeof NotificationsRoute
+  OnboardingRoute: typeof OnboardingRoute
   SavedRoute: typeof SavedRoute
+  SignupRoute: typeof SignupRoute
   CommunitiesIdRoute: typeof CommunitiesIdRoute
   ProfileIdRoute: typeof ProfileIdRoute
   CommunitiesIndexRoute: typeof CommunitiesIndexRoute
@@ -167,6 +258,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/discover': {
@@ -183,6 +281,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FeedRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/forgot-password': {
+      id: '/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof ForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/hackathons': {
       id: '/hackathons'
       path: '/hackathons'
@@ -197,6 +302,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof JobsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/messages': {
+      id: '/messages'
+      path: '/messages'
+      fullPath: '/messages'
+      preLoaderRoute: typeof MessagesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/network': {
       id: '/network'
       path: '/network'
@@ -204,11 +323,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NetworkRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/notifications': {
+      id: '/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof NotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding': {
+      id: '/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/saved': {
       id: '/saved'
       path: '/saved'
       fullPath: '/saved'
       preLoaderRoute: typeof SavedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/communities/': {
@@ -237,12 +377,19 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   DiscoverRoute: DiscoverRoute,
   FeedRoute: FeedRoute,
+  ForgotPasswordRoute: ForgotPasswordRoute,
   HackathonsRoute: HackathonsRoute,
   JobsRoute: JobsRoute,
+  LoginRoute: LoginRoute,
+  MessagesRoute: MessagesRoute,
   NetworkRoute: NetworkRoute,
+  NotificationsRoute: NotificationsRoute,
+  OnboardingRoute: OnboardingRoute,
   SavedRoute: SavedRoute,
+  SignupRoute: SignupRoute,
   CommunitiesIdRoute: CommunitiesIdRoute,
   ProfileIdRoute: ProfileIdRoute,
   CommunitiesIndexRoute: CommunitiesIndexRoute,
