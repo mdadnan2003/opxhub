@@ -35,7 +35,7 @@ export type Post = {
   time: string;
   text: string;
   image?: string;
-  kind?: "achievement" | undefined; _k?: "achievement" | "project" | "team" | "opportunity" | "question";
+  kind?: "achievement" | "project" | "team" | "opportunity" | "question" | undefined;
   opportunity?: { title: string; org: string; mode: string; deadline: string };
   likes: number;
   comments: { id: string; authorId: string; text: string }[];
