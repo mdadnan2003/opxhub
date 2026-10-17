@@ -9,7 +9,7 @@ import { useStore, setState } from "@/lib/store";
 import { seo } from "@/lib/seo";
 import { useState } from "react";
 
-export const Route = createFileRoute("/network")({
+export const Route = createFileRoute("/_authenticated/network")({
   head: () => seo("My Network", "Manage connection requests and grow your student network."),
   component: Network,
 });

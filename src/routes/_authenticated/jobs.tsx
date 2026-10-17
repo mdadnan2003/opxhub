@@ -10,7 +10,7 @@ import { useStore, toggleIn, setState } from "@/lib/store";
 import { seo } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/jobs")({
+export const Route = createFileRoute("/_authenticated/jobs")({
   head: () => seo("Jobs & Internships", "Internships and entry-level roles for students, with deadlines and eligibility."),
   component: Jobs,
 });

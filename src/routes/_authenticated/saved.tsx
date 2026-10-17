@@ -5,7 +5,7 @@ import { PageHeader } from "@/components/opx/primitives";
 import { useStore } from "@/lib/store";
 import { seo } from "@/lib/seo";
 
-export const Route = createFileRoute("/saved")({
+export const Route = createFileRoute("/_authenticated/saved")({
   head: () => seo("Saved Posts", "Posts you've bookmarked to revisit later."),
   component: Saved,
 });

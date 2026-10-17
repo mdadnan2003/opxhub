@@ -8,7 +8,7 @@ import { Switch } from "@/components/ui/switch";
 import { opportunities, hackathons, communities } from "@/lib/mock-data";
 import { seo } from "@/lib/seo";
 
-export const Route = createFileRoute("/admin")({
+export const Route = createFileRoute("/_authenticated/admin")({
   head: () => seo("Admin dashboard", "Manage users, content, opportunities and communities on OPXHUB."),
   component: Admin,
 });

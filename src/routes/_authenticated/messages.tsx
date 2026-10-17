@@ -8,7 +8,7 @@ import { conversations as seed, getUser } from "@/lib/mock-data";
 import { seo } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/messages")({
+export const Route = createFileRoute("/_authenticated/messages")({
   head: () => seo("Messages", "Chat with your connections and hackathon teammates."),
   component: Messages,
 });

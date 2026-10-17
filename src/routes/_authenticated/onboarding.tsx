@@ -8,7 +8,7 @@ import { UserAvatar } from "@/components/opx/primitives";
 import { seo } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/onboarding")({
+export const Route = createFileRoute("/_authenticated/onboarding")({
   head: () => seo("Set up your profile", "Personalize your OPXHUB profile and feed."),
   component: Onboarding,
 });

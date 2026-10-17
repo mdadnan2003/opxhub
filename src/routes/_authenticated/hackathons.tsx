@@ -10,7 +10,7 @@ import { hackathons, teamPosts as seed, getUser, daysLeft, me, type TeamPost } f
 import { seo } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/hackathons")({
+export const Route = createFileRoute("/_authenticated/hackathons")({
   head: () => seo("Hackathons & Team Finder", "Discover upcoming hackathons and find teammates with the skills you need."),
   component: Hackathons,
 });
