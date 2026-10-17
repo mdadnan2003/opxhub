@@ -19,7 +19,7 @@ function Hackathons() {
   const [mode, setMode] = useState<"All" | "Online" | "Offline">("All");
   const [teams, setTeams] = useState<TeamPost[]>(seed);
   const [open, setOpen] = useState(false);
-  const [form, setForm] = useState({ hackathon: hackathons[0].name, idea: "", roles: "", size: "1/4" });
+  const [form, setForm] = useState({ hackathon: hackathons[0]!.name, idea: "", roles: "", size: "1/4" });
   const list = hackathons.filter((h) => mode === "All" || h.mode === mode);
   const inp = "h-10 w-full rounded-lg border bg-muted px-3 text-sm outline-none focus:border-lime";
   return (

@@ -15,7 +15,7 @@ export const Route = createFileRoute("/messages")({
 
 function Messages() {
   const [convos, setConvos] = useState(seed);
-  const [activeId, setActiveId] = useState(seed[0].id);
+  const [activeId, setActiveId] = useState(seed[0]!.id);
   const [text, setText] = useState("");
   const active = convos.find((c) => c.id === activeId)!;
   const other = getUser(active.userId)!;

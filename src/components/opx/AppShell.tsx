@@ -17,7 +17,7 @@ const nav = [
   { to: "/jobs", label: "Jobs & Internships", icon: Briefcase },
   { to: "/communities", label: "Communities", icon: MessagesSquare },
   { to: "/saved", label: "Saved Posts", icon: Bookmark },
-  { to: "/profile/aarav", label: "My Profile", icon: UserRound },
+  
 ] as const;
 
 const mobileNav = [
@@ -69,6 +69,7 @@ export function AppShell({ children, rightRail = true }: { children: React.React
                   </Link>
                 );
               })}
+              <Link to="/profile/$id" params={{ id: me.id }} className={cn("flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium", path.startsWith("/profile/" + me.id) ? "bg-lime-soft" : "text-muted-foreground hover:bg-muted hover:text-foreground")}><UserRound className="size-4.5" />My Profile</Link>
             </nav>
             <div className="surface flex items-center gap-3 p-3">
               <UserAvatar user={me} size={36} />

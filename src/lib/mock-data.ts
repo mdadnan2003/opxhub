@@ -26,7 +26,7 @@ export const users: User[] = [
   { id: "kabir", name: "Kabir Singh", headline: "Open source · Web performance", college: "DTU Delhi", degree: "B.Tech IT", year: 2026, skills: ["Next.js", "Web Vitals", "Rust"], connections: 530, mutual: 9 },
 ];
 
-export const me = users[0];
+export const me = users[0]!;
 export const getUser = (id: string) => users.find((u) => u.id === id);
 
 export type Post = {
@@ -35,7 +35,7 @@ export type Post = {
   time: string;
   text: string;
   image?: string;
-  kind?: "achievement" | "project" | "team" | "opportunity" | "question";
+  kind?: "achievement" | "project" | "team" | "opportunity" | "question" | undefined;
   opportunity?: { title: string; org: string; mode: string; deadline: string };
   likes: number;
   comments: { id: string; authorId: string; text: string }[];
