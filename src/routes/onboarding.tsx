@@ -21,7 +21,7 @@ function Onboarding() {
   const [picked, setPicked] = useState<string[]>([]);
   const toggle = (x: string) => setPicked((s) => s.includes(x) ? s.filter((y) => y !== x) : [...s, x]);
   return (
-    <AuthLayout title={steps[step]} subtitle={`Step ${step + 1} of ${steps.length}`}>
+    <AuthLayout title={steps[step]!} subtitle={`Step ${step + 1} of ${steps.length}`}>
       <Progress value={((step + 1) / steps.length) * 100} className="mb-6 [&>div]:bg-lime" />
       {step === 0 && <div className="space-y-3"><input className={inputCls} placeholder="e.g. Full-stack dev · Building in public" /><textarea className={cn(inputCls, "h-28 py-2")} placeholder="Short bio" /></div>}
       {step === 1 && <div className="flex flex-wrap gap-2">{["React", "Python", "Figma", "PyTorch", "SQL", "Rust", "Node.js", "Go"].map((s) => <button key={s} onClick={() => toggle(s)} className={cn("rounded-full border px-3 py-1.5 text-sm", picked.includes(s) && "border-lime bg-lime text-lime-foreground")}>{s}</button>)}</div>}
