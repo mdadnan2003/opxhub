@@ -8,3 +8,7 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Architecture
+- All sample data lives in src/lib/mock-data.ts and in-memory state in src/lib/store.ts; swap these for backend calls when one is connected, so pages stay unchanged.
+- Logged-in pages wrap content in components/opx/AppShell (3-column layout + mobile bottom nav) to keep navigation consistent.
