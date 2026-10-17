@@ -8,7 +8,7 @@ import { useStore } from "@/lib/store";
 import { seo } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/feed")({
+export const Route = createFileRoute("/_authenticated/feed")({
   head: () => seo("Home feed", "See what students in your network are building, winning and sharing."),
   component: Feed,
 });

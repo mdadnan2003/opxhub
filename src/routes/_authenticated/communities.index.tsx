@@ -6,7 +6,7 @@ import { communities } from "@/lib/mock-data";
 import { useStore, toggleIn } from "@/lib/store";
 import { seo } from "@/lib/seo";
 
-export const Route = createFileRoute("/communities/")({
+export const Route = createFileRoute("/_authenticated/communities/")({
   head: () => seo("Communities", "Join topic communities for AI, web dev, cybersecurity, startups and more."),
   component: Communities,
 });

@@ -8,7 +8,7 @@ import { users, me } from "@/lib/mock-data";
 import { seo } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/discover")({
+export const Route = createFileRoute("/_authenticated/discover")({
   head: () => seo("Discover Students", "Search students by name, college, skill or interest and find hackathon teammates."),
   component: Discover,
 });

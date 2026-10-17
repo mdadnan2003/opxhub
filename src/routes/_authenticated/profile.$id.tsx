@@ -10,7 +10,7 @@ import { getUser, me } from "@/lib/mock-data";
 import { useStore, toggleIn } from "@/lib/store";
 import cover from "@/assets/cover.jpg";
 
-export const Route = createFileRoute("/profile/$id")({
+export const Route = createFileRoute("/_authenticated/profile/$id")({
   loader: ({ params }) => {
     const u = getUser(params.id);
     if (!u) throw notFound();

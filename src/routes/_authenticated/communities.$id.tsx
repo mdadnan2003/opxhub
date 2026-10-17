@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { communities } from "@/lib/mock-data";
 import { useStore, toggleIn } from "@/lib/store";
 
-export const Route = createFileRoute("/communities/$id")({
+export const Route = createFileRoute("/_authenticated/communities/$id")({
   loader: ({ params }) => {
     const c = communities.find((x) => x.id === params.id);
     if (!c) throw notFound();

@@ -7,7 +7,7 @@ import { notifications, getUser } from "@/lib/mock-data";
 import { seo } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/notifications")({
+export const Route = createFileRoute("/_authenticated/notifications")({
   head: () => seo("Notifications", "Connection requests, likes, comments, mentions and opportunity updates."),
   component: Notifications,
 });
