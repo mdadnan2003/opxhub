@@ -23,10 +23,15 @@ import { Route as AuthenticatedMessagesRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedNetworkRouteImport } from './routes/_authenticated/network'
 import { Route as AuthenticatedNotificationsRouteImport } from './routes/_authenticated/notifications'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
+import { Route as AuthenticatedOpensourceRouteImport } from './routes/_authenticated/opensource'
 import { Route as AuthenticatedSavedRouteImport } from './routes/_authenticated/saved'
 import { Route as AuthenticatedCommunitiesIndexRouteImport } from './routes/_authenticated/communities.index'
 import { Route as AuthenticatedCommunitiesIdRouteImport } from './routes/_authenticated/communities.$id'
 import { Route as AuthenticatedProfileIdRouteImport } from './routes/_authenticated/profile.$id'
+import { Route as AuthenticatedSettingsAccountRouteImport } from './routes/_authenticated/settings/account'
+import { Route as AuthenticatedSettingsConnectionsRouteImport } from './routes/_authenticated/settings/connections'
+import { Route as AuthenticatedSettingsProfileRouteImport } from './routes/_authenticated/settings/profile'
+import { Route as AuthenticatedSettingsProjectsRouteImport } from './routes/_authenticated/settings/projects'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -98,6 +103,11 @@ const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
   path: '/onboarding',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedOpensourceRoute = AuthenticatedOpensourceRouteImport.update({
+  id: '/opensource',
+  path: '/opensource',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedSavedRoute = AuthenticatedSavedRouteImport.update({
   id: '/saved',
   path: '/saved',
@@ -120,6 +130,30 @@ const AuthenticatedProfileIdRoute = AuthenticatedProfileIdRouteImport.update({
   path: '/profile/$id',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedSettingsAccountRoute =
+  AuthenticatedSettingsAccountRouteImport.update({
+    id: '/settings/account',
+    path: '/settings/account',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSettingsConnectionsRoute =
+  AuthenticatedSettingsConnectionsRouteImport.update({
+    id: '/settings/connections',
+    path: '/settings/connections',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSettingsProfileRoute =
+  AuthenticatedSettingsProfileRouteImport.update({
+    id: '/settings/profile',
+    path: '/settings/profile',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSettingsProjectsRoute =
+  AuthenticatedSettingsProjectsRouteImport.update({
+    id: '/settings/projects',
+    path: '/settings/projects',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -135,9 +169,14 @@ export interface FileRoutesByFullPath {
   '/network': typeof AuthenticatedNetworkRoute
   '/notifications': typeof AuthenticatedNotificationsRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/opensource': typeof AuthenticatedOpensourceRoute
   '/saved': typeof AuthenticatedSavedRoute
   '/communities/$id': typeof AuthenticatedCommunitiesIdRoute
   '/profile/$id': typeof AuthenticatedProfileIdRoute
+  '/settings/account': typeof AuthenticatedSettingsAccountRoute
+  '/settings/connections': typeof AuthenticatedSettingsConnectionsRoute
+  '/settings/profile': typeof AuthenticatedSettingsProfileRoute
+  '/settings/projects': typeof AuthenticatedSettingsProjectsRoute
   '/communities/': typeof AuthenticatedCommunitiesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -154,9 +193,14 @@ export interface FileRoutesByTo {
   '/network': typeof AuthenticatedNetworkRoute
   '/notifications': typeof AuthenticatedNotificationsRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/opensource': typeof AuthenticatedOpensourceRoute
   '/saved': typeof AuthenticatedSavedRoute
   '/communities/$id': typeof AuthenticatedCommunitiesIdRoute
   '/profile/$id': typeof AuthenticatedProfileIdRoute
+  '/settings/account': typeof AuthenticatedSettingsAccountRoute
+  '/settings/connections': typeof AuthenticatedSettingsConnectionsRoute
+  '/settings/profile': typeof AuthenticatedSettingsProfileRoute
+  '/settings/projects': typeof AuthenticatedSettingsProjectsRoute
   '/communities': typeof AuthenticatedCommunitiesIndexRoute
 }
 export interface FileRoutesById {
@@ -175,9 +219,14 @@ export interface FileRoutesById {
   '/_authenticated/network': typeof AuthenticatedNetworkRoute
   '/_authenticated/notifications': typeof AuthenticatedNotificationsRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
+  '/_authenticated/opensource': typeof AuthenticatedOpensourceRoute
   '/_authenticated/saved': typeof AuthenticatedSavedRoute
   '/_authenticated/communities/$id': typeof AuthenticatedCommunitiesIdRoute
   '/_authenticated/profile/$id': typeof AuthenticatedProfileIdRoute
+  '/_authenticated/settings/account': typeof AuthenticatedSettingsAccountRoute
+  '/_authenticated/settings/connections': typeof AuthenticatedSettingsConnectionsRoute
+  '/_authenticated/settings/profile': typeof AuthenticatedSettingsProfileRoute
+  '/_authenticated/settings/projects': typeof AuthenticatedSettingsProjectsRoute
   '/_authenticated/communities/': typeof AuthenticatedCommunitiesIndexRoute
 }
 export interface FileRouteTypes {
@@ -196,9 +245,14 @@ export interface FileRouteTypes {
     | '/network'
     | '/notifications'
     | '/onboarding'
+    | '/opensource'
     | '/saved'
     | '/communities/$id'
     | '/profile/$id'
+    | '/settings/account'
+    | '/settings/connections'
+    | '/settings/profile'
+    | '/settings/projects'
     | '/communities/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -215,9 +269,14 @@ export interface FileRouteTypes {
     | '/network'
     | '/notifications'
     | '/onboarding'
+    | '/opensource'
     | '/saved'
     | '/communities/$id'
     | '/profile/$id'
+    | '/settings/account'
+    | '/settings/connections'
+    | '/settings/profile'
+    | '/settings/projects'
     | '/communities'
   id:
     | '__root__'
@@ -235,9 +294,14 @@ export interface FileRouteTypes {
     | '/_authenticated/network'
     | '/_authenticated/notifications'
     | '/_authenticated/onboarding'
+    | '/_authenticated/opensource'
     | '/_authenticated/saved'
     | '/_authenticated/communities/$id'
     | '/_authenticated/profile/$id'
+    | '/_authenticated/settings/account'
+    | '/_authenticated/settings/connections'
+    | '/_authenticated/settings/profile'
+    | '/_authenticated/settings/projects'
     | '/_authenticated/communities/'
   fileRoutesById: FileRoutesById
 }
@@ -349,6 +413,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/opensource': {
+      id: '/_authenticated/opensource'
+      path: '/opensource'
+      fullPath: '/opensource'
+      preLoaderRoute: typeof AuthenticatedOpensourceRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/saved': {
       id: '/_authenticated/saved'
       path: '/saved'
@@ -377,6 +448,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProfileIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/settings/account': {
+      id: '/_authenticated/settings/account'
+      path: '/settings/account'
+      fullPath: '/settings/account'
+      preLoaderRoute: typeof AuthenticatedSettingsAccountRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/settings/connections': {
+      id: '/_authenticated/settings/connections'
+      path: '/settings/connections'
+      fullPath: '/settings/connections'
+      preLoaderRoute: typeof AuthenticatedSettingsConnectionsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/settings/profile': {
+      id: '/_authenticated/settings/profile'
+      path: '/settings/profile'
+      fullPath: '/settings/profile'
+      preLoaderRoute: typeof AuthenticatedSettingsProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/settings/projects': {
+      id: '/_authenticated/settings/projects'
+      path: '/settings/projects'
+      fullPath: '/settings/projects'
+      preLoaderRoute: typeof AuthenticatedSettingsProjectsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -390,9 +489,14 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedNetworkRoute: typeof AuthenticatedNetworkRoute
   AuthenticatedNotificationsRoute: typeof AuthenticatedNotificationsRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
+  AuthenticatedOpensourceRoute: typeof AuthenticatedOpensourceRoute
   AuthenticatedSavedRoute: typeof AuthenticatedSavedRoute
   AuthenticatedCommunitiesIdRoute: typeof AuthenticatedCommunitiesIdRoute
   AuthenticatedProfileIdRoute: typeof AuthenticatedProfileIdRoute
+  AuthenticatedSettingsAccountRoute: typeof AuthenticatedSettingsAccountRoute
+  AuthenticatedSettingsConnectionsRoute: typeof AuthenticatedSettingsConnectionsRoute
+  AuthenticatedSettingsProfileRoute: typeof AuthenticatedSettingsProfileRoute
+  AuthenticatedSettingsProjectsRoute: typeof AuthenticatedSettingsProjectsRoute
   AuthenticatedCommunitiesIndexRoute: typeof AuthenticatedCommunitiesIndexRoute
 }
 
@@ -406,9 +510,14 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedNetworkRoute: AuthenticatedNetworkRoute,
   AuthenticatedNotificationsRoute: AuthenticatedNotificationsRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
+  AuthenticatedOpensourceRoute: AuthenticatedOpensourceRoute,
   AuthenticatedSavedRoute: AuthenticatedSavedRoute,
   AuthenticatedCommunitiesIdRoute: AuthenticatedCommunitiesIdRoute,
   AuthenticatedProfileIdRoute: AuthenticatedProfileIdRoute,
+  AuthenticatedSettingsAccountRoute: AuthenticatedSettingsAccountRoute,
+  AuthenticatedSettingsConnectionsRoute: AuthenticatedSettingsConnectionsRoute,
+  AuthenticatedSettingsProfileRoute: AuthenticatedSettingsProfileRoute,
+  AuthenticatedSettingsProjectsRoute: AuthenticatedSettingsProjectsRoute,
   AuthenticatedCommunitiesIndexRoute: AuthenticatedCommunitiesIndexRoute,
 }
 

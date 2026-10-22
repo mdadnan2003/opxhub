@@ -13,13 +13,29 @@ function Forgot() {
   const [sent, setSent] = useState(false);
   return (
     <AuthLayout title="Reset your password" subtitle="We'll email you a reset link.">
-      {sent ? <p className="rounded-lg border bg-lime-soft p-4 text-sm">In the live app, a reset link would be sent now. Email isn't connected in preview mode.</p> : (
-        <form className="space-y-3" onSubmit={(e) => { e.preventDefault(); setSent(true); }}>
+      {sent ? (
+        <p className="rounded-lg border bg-lime-soft p-4 text-sm">
+          In the live app, a reset link would be sent now. Email isn't connected in preview mode.
+        </p>
+      ) : (
+        <form
+          className="space-y-3"
+          onSubmit={(e) => {
+            e.preventDefault();
+            setSent(true);
+          }}
+        >
           <input className={inputCls} type="email" placeholder="Email" required />
-          <Button variant="lime" size="lg" className="w-full">Send reset link</Button>
+          <Button variant="lime" size="lg" className="w-full">
+            Send reset link
+          </Button>
         </form>
       )}
-      <p className="mt-6 text-center text-sm"><Link to="/login" className="font-semibold hover:underline">Back to log in</Link></p>
+      <p className="mt-6 text-center text-sm">
+        <Link to="/login" className="font-semibold hover:underline">
+          Back to log in
+        </Link>
+      </p>
     </AuthLayout>
   );
 }

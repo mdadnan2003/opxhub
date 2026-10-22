@@ -35,12 +35,31 @@ function Community() {
       <div className="space-y-4">
         <div className="overflow-hidden rounded-xl bg-ink p-6 text-ink-foreground">
           <h1 className="text-2xl font-bold">{c.name}</h1>
-          <p className="mt-1 text-sm opacity-70">{c.desc} · {c.members.toLocaleString()} members</p>
-          <Button className="mt-4" variant={joined ? "outline" : "lime"} onClick={() => toggleIn("joined", c.id)}>{joined ? "Leave community" : "Join community"}</Button>
+          <p className="mt-1 text-sm opacity-70">
+            {c.desc} · {c.members.toLocaleString()} members
+          </p>
+          <Button
+            className="mt-4"
+            variant={joined ? "outline" : "lime"}
+            onClick={() => toggleIn("joined", c.id)}
+          >
+            {joined ? "Leave community" : "Join community"}
+          </Button>
         </div>
-        <div className="surface flex items-center gap-3 border-l-4 border-l-lime p-4 text-sm"><Pin className="size-4" /><b>Pinned:</b> {c.pinned}</div>
-        {joined ? <Composer /> : <div className="surface p-4 text-sm text-muted-foreground">Join to post in this community.</div>}
-        {posts.map((p) => <PostCard key={p.id} post={p} />)}
+        <div className="surface flex items-center gap-3 border-l-4 border-l-lime p-4 text-sm">
+          <Pin className="size-4" />
+          <b>Pinned:</b> {c.pinned}
+        </div>
+        {joined ? (
+          <Composer />
+        ) : (
+          <div className="surface p-4 text-sm text-muted-foreground">
+            Join to post in this community.
+          </div>
+        )}
+        {posts.map((p) => (
+          <PostCard key={p.id} post={p} />
+        ))}
       </div>
     </AppShell>
   );

@@ -1,18 +1,95 @@
 import { Link } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
-import type { User } from "@/lib/mock-data";
 
-export function Logo({ dark = false, className }: { dark?: boolean; className?: string }) {
+type AvatarUser = { id: string; name?: string | null };
+
+export function Logo({
+  dark = false,
+  imageSrc,
+  imageAlt = "OPXHUB",
+  className,
+}: {
+  dark?: boolean;
+  imageSrc?: string;
+  imageAlt?: string;
+  className?: string;
+}) {
+  if (imageSrc) {
+    return (
+      <img
+        src={imageSrc}
+        alt={imageAlt}
+        draggable={false}
+        className={cn("block max-h-full w-auto object-contain select-none", className)}
+      />
+    );
+  }
+
   return (
-    <span className={cn("font-display text-xl font-bold tracking-tight", dark ? "text-ink-foreground" : "text-foreground", className)}>
-      OP<span className="text-lime">X</span>HUB
+    <span
+      className={cn(
+        "inline-flex items-center gap-0 font-display text-xl font-black leading-none tracking-[-0.08em]",
+        dark ? "text-ink-foreground" : "text-foreground",
+        className,
+      )}
+      aria-label="OPXHUB"
+    >
+      <span className="tracking-[-0.09em]">OP</span>
+      <span
+        className={cn(
+          "text-lime drop-shadow-[0_0_18px_rgba(163,230,53,0.45)]",
+          dark && "text-lime",
+        )}
+      >
+        X
+      </span>
+      <span className="tracking-[-0.09em]">HUB</span>
     </span>
   );
 }
 
-export function UserAvatar({ user, size = 40, ring = false }: { user: Pick<User, "name" | "id">; size?: number; ring?: boolean }) {
-  const initials = user.name.split(" ").map((p) => p[0]).join("").slice(0, 2);
-  const tone = user.id.charCodeAt(0) % 2 === 0;
+export function BrandLogo({
+  className,
+  width,
+  height,
+  alt = "OPXHUB",
+}: {
+  className?: string;
+  width?: number;
+  height?: number;
+  alt?: string;
+}) {
+  return (
+    <img
+      src="/opxhub-logo.png"
+      alt={alt}
+      width={width}
+      height={height}
+      draggable={false}
+      className={cn("block object-contain select-none", className)}
+    />
+  );
+}
+
+export function UserAvatar({
+  user,
+  size = 40,
+  ring = false,
+}: {
+  user?: AvatarUser;
+  size?: number;
+  ring?: boolean;
+}) {
+  const safeUser = user ?? { id: "guest", name: "Member" };
+  const displayName = safeUser.name?.trim() || "Member";
+  const initials =
+    displayName
+      .split(/\s+/)
+      .filter(Boolean)
+      .map((p) => p[0])
+      .join("")
+      .slice(0, 2) || "M";
+  const tone = (safeUser.id || "guest").charCodeAt(0) % 2 === 0;
   return (
     <span
       style={{ width: size, height: size, fontSize: size * 0.38 }}
@@ -28,15 +105,31 @@ export function UserAvatar({ user, size = 40, ring = false }: { user: Pick<User,
   );
 }
 
-export function UserLink({ user, className }: { user: User; className?: string }) {
+export function UserLink({
+  user,
+  className,
+}: {
+  user: { id: string; name: string };
+  className?: string;
+}) {
   return (
-    <Link to="/profile/$id" params={{ id: user.id }} className={cn("font-semibold hover:underline", className)}>
+    <Link
+      to="/profile/$id"
+      params={{ id: user.id }}
+      className={cn("font-semibold hover:underline", className)}
+    >
       {user.name}
     </Link>
   );
 }
 
-export function SectionTitle({ children, action }: { children: React.ReactNode; action?: React.ReactNode }) {
+export function SectionTitle({
+  children,
+  action,
+}: {
+  children: React.ReactNode;
+  action?: React.ReactNode;
+}) {
   return (
     <div className="mb-3 flex items-center justify-between">
       <h3 className="text-sm font-semibold">{children}</h3>
@@ -45,7 +138,15 @@ export function SectionTitle({ children, action }: { children: React.ReactNode; 
   );
 }
 
-export function PageHeader({ title, subtitle, action }: { title: string; subtitle?: string; action?: React.ReactNode }) {
+export function PageHeader({
+  title,
+  subtitle,
+  action,
+}: {
+  title: string;
+  subtitle?: string;
+  action?: React.ReactNode;
+}) {
   return (
     <div className="surface mb-4 flex flex-wrap items-center justify-between gap-3 p-5">
       <div>
@@ -60,7 +161,7 @@ export function PageHeader({ title, subtitle, action }: { title: string; subtitl
 export function MockNote() {
   return (
     <p className="px-2 text-[11px] leading-relaxed text-muted-foreground">
-      Preview mode · sample data only. Posting, messaging and sign-in are not connected to a backend yet.
+      Your journey starts before your first job. Build, connect, and discover opportunities with OPXHUB.
     </p>
   );
 }

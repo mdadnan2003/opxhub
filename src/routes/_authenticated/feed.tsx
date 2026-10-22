@@ -7,40 +7,88 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useStore } from "@/lib/store";
 import { seo } from "@/lib/seo";
 import { cn } from "@/lib/utils";
+import { relation, useConnections, useMe, useMySaves, usePosts } from "@/lib/api";
 
 export const Route = createFileRoute("/_authenticated/feed")({
-  head: () => seo("Home feed", "See what students in your network are building, winning and sharing."),
+  head: () =>
+    seo("Home feed", "See what students in your network are building, winning and sharing."),
   component: Feed,
 });
 
 const tabs = ["For You", "Following", "Trending"] as const;
 
 function Feed() {
-  const posts = useStore((s) => s.posts);
+  const { profile, id: meId } = useMe();
+  const { data: posts = [], isLoading: postsLoading } = usePosts();
+  const { data: savedSet = new Set<string>(), isLoading: savesLoading } = useMySaves(meId);
+  const { data: connections = [] } = useConnections(meId);
   const connected = useStore((s) => s.connected);
   const [tab, setTab] = useState<(typeof tabs)[number]>("For You");
   const [loading, setLoading] = useState(true);
-  useEffect(() => { const t = setTimeout(() => setLoading(false), 500); return () => clearTimeout(t); }, []);
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 500);
+    return () => clearTimeout(t);
+  }, []);
 
-  const list = tab === "Following" ? posts.filter((p) => connected.has(p.authorId) || p.authorId === "aarav")
-    : tab === "Trending" ? [...posts].sort((a, b) => b.likes - a.likes) : posts;
+  const list =
+    tab === "Following"
+      ? posts.filter(
+          (p) => relation(connections, meId, p.author.id) === "connected" || p.author.id === meId,
+        )
+      : tab === "Trending"
+        ? [...posts].sort((a, b) => b.likeUserIds.length - a.likeUserIds.length)
+        : posts;
 
   return (
     <AppShell>
       <div className="space-y-4">
-        <Composer />
+        <Composer
+          meId={meId ?? profile?.id ?? "aarav"}
+          meName={profile?.full_name ?? "Aarav Mehta"}
+        />
         <div className="flex gap-1 rounded-full border bg-card p-1">
           {tabs.map((t) => (
-            <button key={t} onClick={() => setTab(t)} className={cn("flex-1 rounded-full py-2 text-sm font-semibold transition-colors", tab === t ? "bg-ink text-ink-foreground" : "text-muted-foreground hover:text-foreground")}>{t}</button>
+            <button
+              key={t}
+              onClick={() => setTab(t)}
+              className={cn(
+                "flex-1 rounded-full py-2 text-sm font-semibold transition-colors",
+                tab === t
+                  ? "bg-ink text-ink-foreground"
+                  : "text-muted-foreground hover:text-foreground",
+              )}
+            >
+              {t}
+            </button>
           ))}
         </div>
-        {loading ? [0, 1].map((i) => (
-          <div key={i} className="surface space-y-3 p-4">
-            <div className="flex gap-3"><Skeleton className="size-11 rounded-full" /><div className="flex-1 space-y-2"><Skeleton className="h-3 w-1/3" /><Skeleton className="h-3 w-1/2" /></div></div>
-            <Skeleton className="h-20 w-full" />
+        {loading || postsLoading || savesLoading ? (
+          [0, 1].map((i) => (
+            <div key={i} className="surface space-y-3 p-4">
+              <div className="flex gap-3">
+                <Skeleton className="size-11 rounded-full" />
+                <div className="flex-1 space-y-2">
+                  <Skeleton className="h-3 w-1/3" />
+                  <Skeleton className="h-3 w-1/2" />
+                </div>
+              </div>
+              <Skeleton className="h-20 w-full" />
+            </div>
+          ))
+        ) : list.length ? (
+          list.map((p) => (
+            <PostCard
+              key={p.id}
+              post={p}
+              meId={meId ?? profile?.id ?? "aarav"}
+              saved={savedSet.has(p.id)}
+              connections={connections}
+            />
+          ))
+        ) : (
+          <div className="surface p-10 text-center text-sm text-muted-foreground">
+            No posts from people you follow yet. Connect with more students to fill this tab.
           </div>
-        )) : list.length ? list.map((p) => <PostCard key={p.id} post={p} />) : (
-          <div className="surface p-10 text-center text-sm text-muted-foreground">No posts from people you follow yet. Connect with more students to fill this tab.</div>
         )}
       </div>
     </AppShell>

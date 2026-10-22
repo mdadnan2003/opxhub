@@ -40,7 +40,12 @@ create table public.posts (
   author_id uuid not null references public.profiles(id) on delete cascade,
   body text not null check (char_length(body) between 1 and 3000),
   kind text check (kind in ('achievement','project','team','opportunity','question')),
-  created_at timestamptz not null default now()
+  title text,
+  image_url text,
+  metadata jsonb,
+  is_published boolean not null default true,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
 );
 grant select, insert, update, delete on public.posts to authenticated;
 grant all on public.posts to service_role;
@@ -49,6 +54,12 @@ create policy "posts readable" on public.posts for select to authenticated using
 create policy "create own posts" on public.posts for insert to authenticated with check (auth.uid() = author_id);
 create policy "edit own posts" on public.posts for update to authenticated using (auth.uid() = author_id) with check (auth.uid() = author_id);
 create policy "delete own posts" on public.posts for delete to authenticated using (auth.uid() = author_id);
+
+alter table public.posts add column if not exists title text;
+alter table public.posts add column if not exists image_url text;
+alter table public.posts add column if not exists metadata jsonb;
+alter table public.posts add column if not exists is_published boolean not null default true;
+alter table public.posts add column if not exists updated_at timestamptz not null default now();
 
 create table public.post_likes (
   post_id uuid not null references public.posts(id) on delete cascade,
